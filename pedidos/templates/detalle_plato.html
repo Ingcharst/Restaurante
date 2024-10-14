@@ -1,0 +1,14 @@
+<h1>{{ plato.nombre }}</h1>
+<p>Precio base: ${{ plato.precio_base }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <h3>Selecciona acompañamientos:</h3>
+    {% for acompanamiento in acompanamientos %}
+        <label>
+            <input type="checkbox" name="acompanamientos" value="{{ acompanamiento.id }}">
+            {{ acompanamiento.nombre }} - ${{ acompanamiento.precio }}
+        </label><br>
+    {% endfor %}
+    <button type="submit">Calcular Total</button>
+</form>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Pedidos Pendientes</h1>
+    <div class="row">
+        {% for pedido in pedidos %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Pedido #{{ pedido.id }}</h5>
+                    <p class="card-text">Plato: {{ pedido.plato.nombre }}</p>
+                    <p class="card-text">Cantidad: {{ pedido.cantidad }}</p>
+                    <p class="card-text font-weight-bold">Estado: 
+                        {% if pedido.estado == 'Pendiente' %}
+                            <span class="badge badge-warning">{{ pedido.estado }}</span>
+                        {% elif pedido.estado == 'Preparando' %}
+                            <span class="badge badge-info">{{ pedido.estado }}</span>
+                        {% else %}
+                            <span class="badge badge-success">{{ pedido.estado }}</span>
+                        {% endif %}
+                    </p>
+                    <form method="POST" action="{% url 'cambiarestado' pedido.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="estado">Cambiar estado</label>
+                            <select name="estado" class="form-control">
+                                <option value="Preparando">Preparando</option>
+                                <option value="Listo">Listo</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,225 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+        input[type="text"] {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        a {
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .register-button {
+            background-color: #28a745;
+        }
+        .register-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Iniciar Sesión</h1>
+        
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            <label for="identificacion">Identificación:</label>
+            <input type="text" id="identificacion" name="identificacion" required>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <a href="{% url 'Cliente' %}">
+            <button class="register-button">Regístrese</button>
+        </a>
+
+        {% if error %}
+            <div class="error">
+                <h3>{{ error }}</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: #000; /* Fondo negro */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: white; /* Color de texto blanco */
+        }
+        h1 {
+            color: #ffd700; /* Color dorado para el título */
+            margin: 20px 0;
+            font-size: 24px;
+        }
+        img {
+            max-width: 200px; /* Ajusta el tamaño del logo (más grande) */
+            margin-bottom: 20px; /* Espaciado debajo del logo */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ffd700; /* Color dorado para las etiquetas */
+            text-align: left;
+        }
+        input[type="text"] {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #b8860b; /* Color dorado al enfocar */
+            outline: none;
+        }
+        button {
+            padding: 12px;
+            background-color: #d4af37; /* Color dorado */
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #c6a600; /* Color dorado más oscuro al pasar el mouse */
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        a {
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .register-button {
+            background-color: #d4af37; /* Color dorado para el botón de registro */
+        }
+        .register-button:hover {
+            background-color: #c6a600; /* Color dorado más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="static/pedidos/logo/rebe.jpeg" alt="Logo de Mr Rebe Gourmet">
+        <h1>Iniciar Sesión - Mr Rebe Gourmet</h1>
+        
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            <label for="identificacion">Identificación:</label>
+            <input type="text" id="identificacion" name="identificacion" required>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <a href="{% url 'Cliente' %}">
+            <button class="register-button">Regístrese</button>
+        </a>
+
+        {% if error %}
+            <div class="error">
+                <h3>{{ error }}</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Pedir {{ plato.nombre }}</h1>
+
+    <form method="POST" id="form-identificacion">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="identificacion">Identificación</label>
+            <input type="text" id="identificacion" name="identificacion" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar Cliente</button>
+    </form>
+
+    {% if cliente %}
+        <h5>Bienvenido, {{ cliente.nombre }}</h5>
+        <!-- Aquí va el resto del formulario -->
+    {% elif no_encontrado %}
+        <h5>No se encontró el cliente. Por favor, regístrese.</h5>
+        <!-- Aquí va el Formulario de registro -->
+        <form method="POST" id="form-registro">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Registrar Cliente</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

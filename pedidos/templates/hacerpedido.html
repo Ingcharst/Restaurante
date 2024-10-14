@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Pedir {{ plato.nombre }}</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="{{ plato.imagen.url }}" class="card-img-top" alt="{{ plato.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plato.nombre }}</h5>
+                    <p class="card-text">{{ plato.descripcion }}</p>
+                    <p class="font-weight">Precio: </p>
+                    <p class="font-weight-bold" id = "precioplato" name="precioplato">{{ plato.precio }}</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" name="cantidad" class="form-control" value="1" min="1" required onchange="calcularTotal()">
+                        </div>
+
+                        <div class="complementos form-group">
+                            <h6>Selecciona tus acompañamientos:</h6>
+                            {% for acompanamiento in acomp %}
+                                <label>
+                                    <input type="checkbox" name="acompanamientos" value="{{ acompanamiento.precio }}" onchange="calcularTotal()">
+                                    {{ acompanamiento.nombre }} - ${{ acompanamiento.precio }}
+                                </label><br>
+                            {% endfor %}
+                            <h4>Total: $<span id="total">{{ plato.precio }}</span></h4>
+                            <!--button type="submit">Calcular Total</button-->
+                        </div>
+
+                        <script>
+                            function calcularTotal() {
+                                const precioPlato = parseFloat(document.getElementById('precioplato').innerText.replace(/[^0-9.-]+/g,""));
+                                //const precioPlato = parseFloat(document.getElementById('precioplato').innerText);
+                                const cantidadPlato = parseInt(document.getElementById('cantidad').value);
+                                const checkboxes = document.querySelectorAll('.complementos input[type="checkbox"]');
+                                let sumaOpciones = 0;
+                    
+                                checkboxes.forEach((checkbox) => {
+                                    if (checkbox.checked) {
+                                        sumaOpciones += parseFloat(checkbox.value);
+                                    }
+                                });
+                    
+                                const total = ((precioPlato * cantidadPlato) + sumaOpciones);
+                                document.getElementById('total').innerText = total.toFixed(2);
+                            }                    
+                        </script>
+                        
+
+                        <button type="submit" class="btn btn-success btn-block">Confirmar Pedido</button>
+                        <a href="{% url 'menu' %}" class="btn btn-secondary btn-block">Regresar al Menú</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
