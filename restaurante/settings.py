@@ -96,10 +96,10 @@ DATABASES ={
 	'default':{
 	'ENGINE': 'django.db.backends.mysql',
 	'NAME': 'rebe',
-  	'USER': 'root',
+  	'USER': 'admin',
   	'PASSWORD': 'Pa$$w0rd',
-  	'HOST': '147.79.87.73', #'pedidos.mrrebegourmet.com',
-  	'PORT': ''
+  	'HOST': 'localhost', #'pedidos.mrrebegourmet.com',
+  	'PORT': '3306'
 
     }
 }
